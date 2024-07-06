@@ -1,0 +1,53 @@
+#####################
+Done as single person, Submitted By,
+Name : Janaki Ram Chimata
+Mail : jchimat1@binghamton.edu
+B-No : B00978284
+
+Programming Language : Python
+
+Encryption Used in atm client
+# def encrypt_asymmetric(data, public_key):
+#     ciphertext = public_key.encrypt(
+#         data,
+#         padding.OAEP(
+#             mgf=padding.MGF1(algorithm=hashes.SHA256()),
+#             algorithm=hashes.SHA256(),
+#             label=None
+#         )
+#     )
+#     return ciphertext
+
+# def encrypt_symmetric(data, key):
+#     cipher = Cipher(algorithms.AES(key), modes.CFB(b'\0' * 16), backend=default_backend())
+#     encryptor = cipher.encryptor()
+#     ciphertext = encryptor.update(data.encode()) + encryptor.finalize()
+#     return ciphertext
+
+Decryption used in Bank server.
+# def decrypt_asymmetric(ciphertext, private_key):
+#     plaintext = private_key.decrypt(
+#         ciphertext,
+#         padding.OAEP(
+#             mgf=padding.MGF1(algorithm=hashes.SHA256()),
+#             algorithm=hashes.SHA256(),
+#             label=None
+#         )
+#     )
+#     return plaintext
+
+# cipher = Cipher(algorithms.AES(symmetric_key), modes.CFB(b'\0' * 16), backend=default_backend())
+#         decryptor = cipher.decryptor()
+#         credentials = decryptor.update(encrypted_credentials) + decryptor.finalize()
+
+Code tested on RemoteCS machine.
+
+Commands to Execute:
+key generation :
+openssl genpkey -algorithm RSA -out private_key.pem
+openssl rsa -pubout -in private_key.pem -out public_key.pem
+
+Run Bank server : python3 bank.py 12345 (<port number given as 12345>)
+Run Atm client : python3 atm.py remote00.cs.binghamton.edu 12345 (Servers domain : eg. remote00 and port number is 12345)
+
+Program is run and tested on remote cs server. When we encounter any network issue there could be chance in delay of response. In such cases, we can interrupt and start running bank server and then client again. This solves the issue.
